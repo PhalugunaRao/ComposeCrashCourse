@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -20,11 +21,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
+    private val mainActivityViewModel by viewModels<MainActivityViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MainScreen(MainActivityViewModel())
+            MainScreen(mainActivityViewModel)
 
         }
     }
@@ -33,9 +35,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen(mainActivityViewModel: MainActivityViewModel?){
 
-    mainActivityViewModel?.counter?.observeAsState()?.value.let {
-        Log.i("MainScreen","value get update $it")
-    }
+    mainActivityViewModel?.counter?.observeAsState()?.value
 
     Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
