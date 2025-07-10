@@ -2,6 +2,7 @@ package com.phalu.composecrashcourse
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -17,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -36,6 +38,9 @@ class MainActivity : ComponentActivity() {
 fun MainScreen(mainActivityViewModel: MainActivityViewModel?){
 
     mainActivityViewModel?.counter?.observeAsState()?.value
+    mainActivityViewModel?.error?.observeAsState()?.value.let {
+        Toast.makeText(LocalContext.current,it.toString(),Toast.LENGTH_SHORT).show()
+    }
 
     Column(modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
