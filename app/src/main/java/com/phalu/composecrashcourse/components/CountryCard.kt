@@ -101,7 +101,7 @@ fun CountryCard(countryInfo: CountryInfo) {
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    CirculerText(countryInfo.currencySymbol)
+                    //CirculerText(countryInfo.currencySymbol)
                     Text(
                         text = countryInfo.currencyName,
                         modifier = Modifier.fillMaxWidth(0.4f).padding(2.dp),
