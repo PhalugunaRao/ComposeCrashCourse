@@ -15,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.phalu.composecrashcourse.data.CountryInfo
 
@@ -28,6 +29,7 @@ fun CountryCardWithConstrainLayout(countryInfo: CountryInfo){
         val startGuideline =createGuidelineFromStart(2.dp)
         var topBarrier = createTopBarrier(flag)
         var startBarrier = createStartBarrier(flag)
+        var verticalChain = createVerticalChain(flag,commonName,capital, chainStyle = ChainStyle.Spread)
 
         Image(
             painter = imagePainter,
@@ -37,17 +39,16 @@ fun CountryCardWithConstrainLayout(countryInfo: CountryInfo){
                 .height(70.dp)
                 .padding(2.dp)
                 .constrainAs(flag){
-                    top.linkTo(topGuideline)
-                    start.linkTo(startGuideline)
+
                 })
 
         Text(
             text = countryInfo.commonName,
             modifier = Modifier.fillMaxWidth(1.0f)
                 .padding(2.dp).constrainAs(commonName){
-                    top.linkTo(flag.bottom)
-                    start.linkTo(startBarrier)
+                    start.linkTo(flag.start)
                     end.linkTo(flag.end)
+
                 },
             fontSize = 20.sp,
             textAlign = TextAlign.Center
@@ -56,9 +57,9 @@ fun CountryCardWithConstrainLayout(countryInfo: CountryInfo){
             text = countryInfo.nationalCapital,
             modifier = Modifier.fillMaxWidth(1.0f)
                 .padding(2.dp).constrainAs(capital){
-                    start.linkTo(startBarrier)
-                    top.linkTo(commonName.bottom)
+                    start.linkTo(flag.start)
                     end.linkTo(flag.end)
+
 
                 },
             fontSize = 20.sp,
