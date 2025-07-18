@@ -1,5 +1,6 @@
 package com.phalu.composecrashcourse
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.ContentInfo
@@ -28,55 +29,33 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.phalu.composecrashcourse.components.CountryCardWithConstrainLayout
+import com.phalu.composecrashcourse.data.Country
 import com.phalu.composecrashcourse.data.CountryInfo
 import com.phalu.composecrashcourse.data.getCountryList
+import com.phalu.composecrashcourse.data.getCountryListFromJson
 import com.phalu.composecrashcourse.ui.theme.ComposeCrashCourseTheme
 
 class MainActivity : ComponentActivity() {
-    private val indiaInfo = CountryInfo(R.drawable.`in`,
-        "India",
-        "New Delhi",
-          "Republic of India",
-               "Asia",
-            "South Asia",
-        "₹",
-         "Indian Rupee",
-           "+91", ".in")
-    private val countries = getCountryList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainScreen(countries)
+            MainScreen()
             //Greeting("Demo")
         }
     }
 }
 
-@Composable
-fun Greeting(name:String){
-    Column(modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center) {
-        Text(text = "Hello Phalu $name",
-            modifier = Modifier
-                .width(200.dp)
-                .height(100.dp)
-                .clip(RoundedCornerShape(2.dp))
-                .background(Color.LightGray)
-                .border(1.dp,Color.Black)
-                .clickable { Log.i("onclick","demo click") }
-                .padding(10.dp)
 
-        )
-    }
-}
 
 @Composable
-fun MainScreen(countries: List<CountryInfo>) {
+fun MainScreen() {
+    val context: Context = LocalContext.current
+    val countries = getCountryListFromJson(context)
     ComposeCrashCourseTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
             LazyColumn {
@@ -89,7 +68,7 @@ fun MainScreen(countries: List<CountryInfo>) {
 }
 
 @Composable
-fun CountryCard(countryInfo: CountryInfo){
+fun CountryCard(countryInfo: Country){
     Surface(modifier = Modifier
         .fillMaxWidth()
         .padding(5.dp)
@@ -103,6 +82,6 @@ fun CountryCard(countryInfo: CountryInfo){
 @Composable
 fun DefaultPreview() {
 
-    MainScreen(getCountryList())
+    MainScreen()
 }
 

@@ -1,6 +1,8 @@
 package com.phalu.composecrashcourse.data
 
+import android.content.Context
 import com.phalu.composecrashcourse.R
+import kotlinx.serialization.json.Json
 
 fun getCountryList():MutableList<CountryInfo>{
     val countryList = mutableListOf<CountryInfo>()
@@ -106,4 +108,16 @@ fun getCountryList():MutableList<CountryInfo>{
         ".np"))
 
     return countryList
+}
+
+fun getJsonString(context: Context): String{
+    val inputStream = context.resources.openRawResource(R.raw.countries)
+    return inputStream.bufferedReader().use { it.readText() }
+
+}
+
+fun getCountryListFromJson(context: Context): MutableList<Country>{
+    val jsonStringFromRaw = getJsonString(context)
+    return Json { ignoreUnknownKeys = true }.decodeFromString(jsonStringFromRaw)
+
 }
