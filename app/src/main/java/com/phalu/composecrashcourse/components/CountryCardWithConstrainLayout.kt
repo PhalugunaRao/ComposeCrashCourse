@@ -110,16 +110,16 @@ fun CountryCardWithConstrainLayout(countryInfo: CountryInfo){
                     bottom.linkTo(parent.bottom)
                     end.linkTo(mobileCode.start)
                 },
-            fontSize = 20.sp,
             textAlign = TextAlign.Center
         )
         Text(
             text = countryInfo.mobileCode,
             modifier = Modifier
-                .padding(2.dp).constrainAs(mobileCode){
+                .padding(2.dp)
+                .constrainAs(mobileCode){
                     top.linkTo(subregion.bottom)
                     end.linkTo(parent.end)
-                },
+                }.width(50.dp),
             fontSize = 20.sp,
             textAlign = TextAlign.Center
         )
@@ -129,7 +129,7 @@ fun CountryCardWithConstrainLayout(countryInfo: CountryInfo){
                 .padding(2.dp).constrainAs(tld){
                     top.linkTo(mobileCode.bottom)
                     end.linkTo(parent.end)
-                },
+                }.width(50.dp),
             fontSize = 20.sp,
             textAlign = TextAlign.Center
         )
