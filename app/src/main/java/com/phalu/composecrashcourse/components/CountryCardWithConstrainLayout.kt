@@ -41,7 +41,15 @@ fun CountryCardWithConstrainLayout(countryInfo: CountryInfo){
 //
 //                })
 
-        AsyncImage(imageResId,countryInfo.commonName)
+        AsyncImage(imageResId,countryInfo.commonName, contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxWidth(0.35f)
+                .height(70.dp)
+                .padding(2.dp)
+                .constrainAs(flag){
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
+
+                })
 
         Text(
             text = countryInfo.commonName,
