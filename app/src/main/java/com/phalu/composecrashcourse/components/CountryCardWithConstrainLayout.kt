@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Text
@@ -22,32 +23,30 @@ import com.phalu.composecrashcourse.data.CountryInfo
 @Composable
 fun CountryCardWithConstrainLayout(countryInfo: CountryInfo){
     ConstraintLayout(modifier = Modifier.wrapContentHeight().fillMaxWidth().padding(2.dp)) {
-     val(flag, commonName, capital) = createRefs()
+     val(flag, commonName, capital,officialName, region, subregion, currencySymbol, currencyName, mobileCode, tld) = createRefs()
         val imageResId = countryInfo.flagId
         val imagePainter: Painter = painterResource(imageResId)
-        val topGuideline = createGuidelineFromTop(2.dp)
-        val startGuideline =createGuidelineFromStart(2.dp)
-        var topBarrier = createTopBarrier(flag)
-        var startBarrier = createStartBarrier(flag)
-        var verticalChain = createVerticalChain(flag,commonName,capital, chainStyle = ChainStyle.Spread)
 
         Image(
             painter = imagePainter,
             contentDescription = "country",
             contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxWidth(0.3f)
+            modifier = Modifier.fillMaxWidth(0.35f)
                 .height(70.dp)
                 .padding(2.dp)
                 .constrainAs(flag){
+                    top.linkTo(parent.top)
+                    start.linkTo(parent.start)
 
                 })
 
         Text(
             text = countryInfo.commonName,
-            modifier = Modifier.fillMaxWidth(1.0f)
+            modifier = Modifier.fillMaxWidth()
                 .padding(2.dp).constrainAs(commonName){
-                    start.linkTo(flag.start)
+                    start.linkTo(parent.start)
                     end.linkTo(flag.end)
+                    top.linkTo(flag.bottom)
 
                 },
             fontSize = 20.sp,
@@ -55,16 +54,86 @@ fun CountryCardWithConstrainLayout(countryInfo: CountryInfo){
         )
         Text(
             text = countryInfo.nationalCapital,
-            modifier = Modifier.fillMaxWidth(1.0f)
+            modifier = Modifier.fillMaxWidth()
                 .padding(2.dp).constrainAs(capital){
-                    start.linkTo(flag.start)
+                    start.linkTo(parent.start)
                     end.linkTo(flag.end)
-
-
+                    top.linkTo(commonName.bottom)
                 },
             fontSize = 20.sp,
             textAlign = TextAlign.Center
         )
+        Text(
+            text = countryInfo.officialName,
+            modifier = Modifier.fillMaxWidth(0.65f)
+                .padding(2.dp).constrainAs(officialName){
+                    top.linkTo(parent.top)
+                    start.linkTo(flag.end)
+                    end.linkTo(parent.end)
+                },
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center
+        )
+        Text(
+            text = countryInfo.region,
+            modifier = Modifier.fillMaxWidth(1.0f)
+                .padding(2.dp).constrainAs(region){
+                    top.linkTo(officialName.bottom)
+                    start.linkTo(flag.end)
+                    end.linkTo(parent.end)
+                },
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center
+        )
+        Text(
+            text = countryInfo.subRegion,
+            modifier = Modifier.fillMaxWidth(1.0f)
+                .padding(2.dp).constrainAs(subregion){
+                    top.linkTo(region.bottom)
+                    start.linkTo(officialName.start)
+                    end.linkTo(officialName.end)
+                },
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center
+        )
+        CirculerText(text = countryInfo.currencySymbol,
+            modifier = Modifier.constrainAs(currencySymbol){
+                start.linkTo(flag.end, margin = 30.dp)
+                bottom.linkTo(parent.bottom, margin = 8.dp)
+            })
+        Text(
+            text = countryInfo.currencyName,
+            modifier = Modifier.fillMaxWidth()
+                .padding(2.dp).constrainAs(currencyName){
+                    top.linkTo(subregion.bottom)
+                    start.linkTo(currencySymbol.end)
+                    bottom.linkTo(parent.bottom)
+                    end.linkTo(mobileCode.start)
+                },
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center
+        )
+        Text(
+            text = countryInfo.mobileCode,
+            modifier = Modifier
+                .padding(2.dp).constrainAs(mobileCode){
+                    top.linkTo(subregion.bottom)
+                    end.linkTo(parent.end)
+                },
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center
+        )
+        Text(
+            text = countryInfo.tld,
+            modifier = Modifier
+                .padding(2.dp).constrainAs(tld){
+                    top.linkTo(mobileCode.bottom)
+                    end.linkTo(parent.end)
+                },
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center
+        )
+
 
 
 

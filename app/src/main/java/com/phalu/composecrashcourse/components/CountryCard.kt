@@ -31,7 +31,7 @@ fun CountryCard(countryInfo: CountryInfo) {
     Surface(
         modifier = Modifier
             .fillMaxWidth(1.0f)
-            .padding(10.dp, 50.dp, 10.dp, 10.dp)
+            .padding(10.dp, 10.dp, 10.dp, 10.dp)
             .wrapContentHeight(align = Alignment.Top)
             .border(1.dp, Color.LightGray),
         shadowElevation = 2.dp
@@ -101,7 +101,7 @@ fun CountryCard(countryInfo: CountryInfo) {
                     horizontalArrangement = Arrangement.SpaceEvenly,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    //CirculerText(countryInfo.currencySymbol)
+                    CirculerText(countryInfo.currencySymbol,modifier=Modifier)
                     Text(
                         text = countryInfo.currencyName,
                         modifier = Modifier.fillMaxWidth(0.4f).padding(2.dp),
