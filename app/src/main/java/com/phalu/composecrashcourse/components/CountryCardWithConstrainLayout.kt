@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
+import coil3.compose.AsyncImage
 import com.phalu.composecrashcourse.data.CountryInfo
 
 @Composable
@@ -27,18 +28,20 @@ fun CountryCardWithConstrainLayout(countryInfo: CountryInfo){
         val imageResId = countryInfo.flagId
         val imagePainter: Painter = painterResource(imageResId)
 
-        Image(
-            painter = imagePainter,
-            contentDescription = "country",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxWidth(0.35f)
-                .height(70.dp)
-                .padding(2.dp)
-                .constrainAs(flag){
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
+//        Image(
+//            painter = imagePainter,
+//            contentDescription = "country",
+//            contentScale = ContentScale.Crop,
+//            modifier = Modifier.fillMaxWidth(0.35f)
+//                .height(70.dp)
+//                .padding(2.dp)
+//                .constrainAs(flag){
+//                    top.linkTo(parent.top)
+//                    start.linkTo(parent.start)
+//
+//                })
 
-                })
+        AsyncImage(imageResId,countryInfo.commonName)
 
         Text(
             text = countryInfo.commonName,
