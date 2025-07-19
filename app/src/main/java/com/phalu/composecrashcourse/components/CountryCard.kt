@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.phalu.composecrashcourse.R
+import com.phalu.composecrashcourse.data.Country
 import com.phalu.composecrashcourse.data.CountryInfo
 
 @Composable
@@ -132,5 +133,18 @@ fun CountryCard(countryInfo: CountryInfo) {
         }
 
 
+    }
+}
+
+@Composable
+fun CountryCard(countryInfo: Country){
+    Surface(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(5.dp)
+            .border(1.dp, Color.LightGray).wrapContentHeight(align = Alignment.Top),
+        shadowElevation = 2.dp
+    ) {
+        CountryCardWithConstrainLayout(countryInfo)
     }
 }
