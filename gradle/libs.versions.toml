@@ -13,6 +13,8 @@ constraintLayout = "2.2.1"
 constraintLayoutCompose = "1.1.1"
 coil3 = "3.2.0"
 kotlinxSerializationJson = "1.6.3"
+composeMaterialIcons = "1.4.3"
+
 
 
 
@@ -38,6 +40,7 @@ androidx-constraintlayout-compose = { group = "androidx.constraintlayout", name 
 coil3-compose = { group = "io.coil-kt.coil3", name = "coil-compose", version.ref = "coil3" }
 coil3-network-okhttp = { group = "io.coil-kt.coil3", name = "coil-network-okhttp", version.ref = "coil3" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended", version.ref = "composeMaterialIcons" }
 
 
 [plugins]
